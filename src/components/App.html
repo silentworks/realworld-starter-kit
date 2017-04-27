@@ -1,0 +1,42 @@
+<Navigation />
+
+  {{#if childview == 'signup'}}
+    <SignUp />
+  {{elseif childview == 'settings'}}
+    <Settings />
+  {{elseif childview == 'create'}}
+    <CreateEditArticle />
+  {{else}}
+    <Feed />
+  {{/if}}
+
+<Footer />
+
+<script>
+import Navigation from './Navigation.html';
+import Feed from './Feed.html';
+import Footer from './Footer.html';
+import Settings from './Settings.html';
+import Article from './Article.html';
+import CreateEditArticle from './CreateEditArticle.html';
+import Profile from './Profile.html';
+import SignUp from './SignUp.html';
+
+export default {
+  data() {
+    return {
+      childview: 'feed'
+    };
+  },
+  components: {
+    Navigation,
+    Feed,
+    Footer,
+    Settings,
+    SignUp,
+    Profile,
+    Article,
+    CreateEditArticle
+  }
+}
+</script>
