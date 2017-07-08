@@ -1,5 +1,8 @@
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createBrowserHistory';
 import App from './components/App.html';
+import service from './services';
+
+service.Auth.login('john@jacob.com', 'johnnyjacob').then(response => console.log(response));
 
 const history = createHistory();
 

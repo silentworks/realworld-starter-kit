@@ -2,6 +2,8 @@
 
   {{#if childview == 'signup'}}
     <SignUp />
+  {{elseif childview == 'login'}}
+    <Login />
   {{elseif childview == 'settings'}}
     <Settings />
   {{elseif childview == 'create'}}
@@ -21,6 +23,7 @@ import Article from './Article.html';
 import CreateEditArticle from './CreateEditArticle.html';
 import Profile from './Profile.html';
 import SignUp from './SignUp.html';
+import Login from './Login.html';
 
 export default {
   data() {
@@ -34,6 +37,7 @@ export default {
     Footer,
     Settings,
     SignUp,
+    Login,
     Profile,
     Article,
     CreateEditArticle
