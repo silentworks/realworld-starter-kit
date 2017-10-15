@@ -1,4 +1,7 @@
 var path = require('path');
+const { readFileSync } = require('fs');
+
+const babelSettings = JSON.parse(readFileSync('.babelrc'));
 
 module.exports = {
   entry: './src/index.js',
@@ -16,9 +19,7 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['es2015']
-          }
+          query: babelSettings
         }
       },
       {
@@ -27,5 +28,6 @@ module.exports = {
         use: [ 'svelte-loader' ]
       }
     ]
-  }
+  },
+  devtool: 'inline-source-map'
 };

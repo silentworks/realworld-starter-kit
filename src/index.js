@@ -1,8 +1,5 @@
 import createHistory from 'history/createBrowserHistory';
 import App from './components/App.html';
-import service from './services';
-
-service.Auth.login('john@jacob.com', 'johnnyjacob').then(response => console.log(response));
 
 const history = createHistory();
 
@@ -18,7 +15,7 @@ const SetChildViewComponent = ((location) => {
   var hashValue = hash.replace('#/','');
   var childComp = 'feed';
 
-  if( hashValue ) {
+  if (hashValue ) {
     childComp = hashValue;
   }
   app.set({ childview: childComp });
@@ -30,3 +27,5 @@ history.listen(SetChildViewComponent);
 
 // Intial view or handles when page refreshed
 SetChildViewComponent(window.location);
+
+window.app = app;

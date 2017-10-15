@@ -1,9 +1,9 @@
-<Navigation />
+<Navigation user={{user.data}} isLoggedIn={{isLoggedIn}} />
 
-  {{#if childview == 'signup'}}
+  {{#if childview == 'register'}}
     <SignUp />
   {{elseif childview == 'login'}}
-    <Login />
+    <Login on:login="login(event.email, event.password)" errors={{userLoginErrors}} />
   {{elseif childview == 'settings'}}
     <Settings />
   {{elseif childview == 'create'}}
@@ -15,6 +15,7 @@
 <Footer />
 
 <script>
+import state from '../store.js';
 import Navigation from './Navigation.html';
 import Feed from './Feed.html';
 import Footer from './Footer.html';
@@ -24,12 +25,34 @@ import CreateEditArticle from './CreateEditArticle.html';
 import Profile from './Profile.html';
 import SignUp from './SignUp.html';
 import Login from './Login.html';
+import { login } from '../actions.js';
 
 export default {
   data() {
-    return {
-      childview: 'feed'
+    let data = {
+      loggedIn: false,
+      childview: 'feed',
     };
+    return Object.assign(data, state);
+  },
+  methods: {
+    login(email, password) {
+      login(email, password).then(
+        response => {
+          this.set({user: response.user});
+          location.hash = '/';
+          console.log('correct: ', response);
+          return response;
+        },
+        ({ response }) => {
+          console.log('errors: ', response);
+          this.set({userLoginErrors: response.data.errors})
+        }
+      );
+    }
+  },
+  computed: {
+    isLoggedIn: (user) => user.username
   },
   components: {
     Navigation,
