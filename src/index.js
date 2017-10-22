@@ -1,31 +1,24 @@
-import createHistory from 'history/createBrowserHistory';
+import createStateRouter from 'abstract-state-router';
+import svelteRenderer from 'svelte-state-renderer';
 import App from './components/App.html';
+import Feed from "./components/Feed.html";
 
-const history = createHistory();
+const renderer = svelteRenderer({});
+const router = createStateRouter(renderer, document.querySelector('main'));
 
-var app = new App({
-  target: document.querySelector('main')
-});
-
-const SetChildViewComponent = ((location) => {
-  var path = location.pathname;
-  var hash = location.hash;
- 
-  console.log('Path ==> ', path,' hash ==> ', hash);
-  var hashValue = hash.replace('#/','');
-  var childComp = 'feed';
-
-  if (hashValue ) {
-    childComp = hashValue;
-  }
-  app.set({ childview: childComp });
-});
-
-
-// Listens for location change and sets appropriate child view
-history.listen(SetChildViewComponent);
-
-// Intial view or handles when page refreshed
-SetChildViewComponent(window.location);
+var app = new App();
 
 window.app = app;
+
+router.addState({
+  name: 'app',
+  route: '',
+  template: app,
+  defaultChild: 'feed'
+});
+
+router.addState({
+  name: 'app.feed',
+  route: '/',
+  template: new Feed()
+});

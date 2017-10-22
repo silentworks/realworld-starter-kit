@@ -11,8 +11,10 @@
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
+    "abstract-state-router": "^6.0.3",
     "axios": "^0.16.2",
     "history": "^4.6.1",
-    "svelte": "^1.40.2"
+    "svelte": "^1.40.2",
+    "svelte-state-renderer": "^1.2.5"
   }
 }
